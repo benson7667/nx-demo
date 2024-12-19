@@ -14,6 +14,31 @@ module.exports = {
       htmlAcceptHeaders: ['text/html', 'application/xhtml+xml'],
     },
   },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx|ts|tsx|mjs|cjs)$/,
+        include: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            targets: [
+              '> 0.5%',
+              'ie >= 11',
+              'chrome >= 60',
+              'firefox >= 60',
+              'safari >= 11',
+              'edge >= 16',
+            ],
+            presets: [
+              '@babel/preset-env', // Transpile modern JavaScript
+              '@babel/preset-react', // For JSX if you're using React
+            ],
+          },
+        },
+      },
+    ],
+  },
   plugins: [
     new NxAppWebpackPlugin({
       tsConfig: './tsconfig.app.json',

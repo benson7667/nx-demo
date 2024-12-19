@@ -1,6 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { increment, RootState } from './store';
 
+class Person {
+  #name: string;
+  constructor(name: string) {
+    this.#name = name;
+  }
+
+  get name() {
+    return this.#name;
+  }
+
+  set name(value: string) {
+    this.#name = value;
+  }
+}
+
+const person = new Person('John');
+
 export default function Inner() {
   const count = useSelector((state: RootState) => state.counter.value);
   const dispatch = useDispatch();
@@ -15,6 +32,7 @@ export default function Inner() {
         >
           Increment
         </button>
+        <p>Person name: {person.name}</p>
       </div>
     </div>
   );
