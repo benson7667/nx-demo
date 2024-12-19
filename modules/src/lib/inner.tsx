@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { increment, RootState } from './store';
+import { useQuery } from '@tanstack/react-query';
 
 class Person {
   #name: string;
@@ -18,9 +19,18 @@ class Person {
 
 const person = new Person('John');
 
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export default function Inner() {
   const count = useSelector((state: RootState) => state.counter.value);
   const dispatch = useDispatch();
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['person'],
+    queryFn: () => sleep(1000).then(() => person.name),
+  });
+
+  console.log(data);
 
   return (
     <div className="h-screen w-screen flex items-center justify-center">
@@ -32,7 +42,8 @@ export default function Inner() {
         >
           Increment
         </button>
-        <p>Person name: {person.name}</p>
+
+        {isLoading && !error ? <p>Loading...</p> : <p>Person name: {data}</p>}
       </div>
     </div>
   );
