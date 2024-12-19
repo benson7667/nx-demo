@@ -1,9 +1,9 @@
-import NxWelcome from './nx-welcome';
+import { DemoModules } from '@demo/modules';
 
 export function App() {
   return (
     <div>
-      <NxWelcome title="demo" />
+      <DemoModules />
     </div>
   );
 }
