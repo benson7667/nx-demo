@@ -2,7 +2,10 @@
   "name": "@demo/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "dev": "nx serve demo",
+    "build": "nx build demo"
+  },
   "private": true,
   "dependencies": {
     "react": "18.3.1",
